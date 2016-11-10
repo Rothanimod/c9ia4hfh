@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :find_room, only: [:edit, :update]
+  before_action :find_room, only: [:edit, :update, :destroy]
 
   def index
     @rooms = Room.all
@@ -28,6 +28,12 @@ class RoomsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @room.destroy
+    flash[:notice] = "the Room was successfully destroyed"
+    redirect_to rooms_path
   end
 
   protected
